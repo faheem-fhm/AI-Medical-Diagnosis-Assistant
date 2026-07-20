@@ -4,7 +4,7 @@ import os
 from utils.preprocess import preprocess_image
 
 # Load the trained model only once
-MODEL_PATH = os.path.join("model", "model.tflite")
+MODEL_PATH = os.path.join("model", "pneumonia_model.keras")
 model = tf.keras.models.load_model(MODEL_PATH)
 
 
