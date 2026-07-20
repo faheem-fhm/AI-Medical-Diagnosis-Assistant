@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Diagnosis Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="result-card">
+
+        <h1>
+            <i class="fa-solid fa-stethoscope"></i>
+            AI Diagnosis Result
+        </h1>
+
+        <div class="image-section">
+
+            <img src="{{ url_for('uploaded_file', filename=image) }}"
+                 alt="Chest X-ray">
+
+        </div>
+
+        <div class="prediction-section">
+
+            {% if prediction == "NORMAL" %}
+
+                <h2 class="normal">
+                    <i class="fa-solid fa-circle-check"></i>
+                    {{ prediction }}
+                </h2>
+
+            {% else %}
+
+                <h2 class="pneumonia">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    {{ prediction }}
+                </h2>
+
+            {% endif %}
+
+            <h3>
+
+                Confidence :
+                <span>{{ confidence }}</span>
+
+            </h3>
+            <div class="suggestion-box">
+
+                <h3 class="main-heading">
+                    <i class="fa-solid fa-notes-medical"></i>
+                    Assessment & Recommendation
+                </h3>
+
+                <h4 class="section-title summary">
+                    <i class="fa-solid fa-file-waveform"></i>
+                    Assessment Summary
+                </h4>
+
+                <p>{{ suggestion }}</p>
+
+                <h4 class="section-title recommendation">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    Recommendation
+                </h4>
+
+                {% if prediction == "PNEUMONIA" %}
+
+                <ul>
+                    <li>  Consult a healthcare professional for a detailed medical evaluation.</li>
+                    <li>  Follow the prescribed treatment plan recommended by your doctor.</li>
+                    <li>  Stay hydrated, get adequate rest, and monitor your symptoms.</li>
+                    <li>  Seek immediate medical attention if symptoms worsen.</li>
+                </ul>
+
+                {% else %}
+
+                <ul>
+                    <li>  Continue maintaining a healthy lifestyle and balanced nutrition.</li>
+                    <li>  Stay physically active to support overall lung health.</li>
+                    <li>  Consult a healthcare professional if symptoms persist.</li>
+                    <li>  Attend routine health check-ups as recommended.</li>
+                </ul>
+
+                {% endif %}
+
+                <h4 class="section-title disclaimer">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Disclaimer
+                </h4>
+
+                <p>
+                    This prediction is generated using an AI model for educational and preliminary screening purposes only. It should not replace professional medical diagnosis or clinical judgment.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="button-area">
+
+            <a href="/">
+
+                <button class="primary">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Analyze Another Image
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Medical Diagnosis Assistant</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            <i class="bi bi-heart-pulse-fill"></i>
+            AI Medical Diagnosis
+        </div>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#upload-section">Upload</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="left">
+
+            <h1>AI Powered Chest X-ray Diagnosis</h1>
+
+            <p>
+                Detect pneumonia from Chest X-ray images using
+                Deep Learning and Transfer Learning with
+                EfficientNetB0.
+            </p>
+
+            <div class="buttons">
+
+                <a href="#upload-section">
+                    <button type="button" class="primary">
+                        Upload X-ray
+                    </button>
+                </a>
+
+                <button type="button" class="secondary">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="right">
+
+            <div class="card">
+
+                <i class="bi bi-hospital"></i>
+
+                <h2>Medical AI</h2>
+
+                <p>Fast • Accurate • Reliable</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features" id="features">
+
+        <h2>Why Choose Our AI?</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <i class="bi bi-cpu-fill"></i>
+                <h3>AI Powered</h3>
+                <p>Advanced Deep Learning model trained on Chest X-ray images.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="bi bi-lightning-charge-fill"></i>
+                <h3>Fast Prediction</h3>
+                <p>Diagnosis results in just a few seconds.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="bi bi-bullseye"></i>
+                <h3>High Accuracy</h3>
+                <p>EfficientNetB0 Transfer Learning for reliable predictions.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="bi bi-shield-check"></i>
+                <h3>Secure</h3>
+                <p>Your uploaded medical images remain private and protected.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= UPLOAD ================= -->
+
+<section class="upload-section" id="upload-section">
+
+    <h2>Upload Chest X-ray</h2>
+
+    <p class="upload-subtitle">
+        Upload a Chest X-ray image and let our AI analyze it in seconds.
+    </p>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-message">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form id="uploadForm"
+          action="{{ url_for('predict') }}"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <div class="upload-box" id="uploadBox">
+
+            <input
+                type="file"
+                id="fileInput"
+                name="image"
+                accept=".jpg,.jpeg,.png"
+                hidden>
+
+            <!-- Upload Area -->
+            <div id="uploadContent">
+
+                <i class="bi bi-cloud-arrow-up-fill"></i>
+
+                <h3>Drag & Drop Your Chest X-ray</h3>
+
+                <p>or</p>
+
+                <button
+                    type="button"
+                    class="upload-btn"
+                    onclick="document.getElementById('fileInput').click()">
+
+                    Browse Files
+
+                </button>
+
+                <small>
+                    Supported Formats: JPG • JPEG • PNG
+                </small>
+
+            </div>
+
+            <!-- Preview -->
+            <div id="previewContainer" style="display:none;">
+
+                <img
+                    id="previewImage"
+                    src=""
+                    alt="Preview">
+
+                <h4 id="fileName"></h4>
+
+                <button
+                    type="button"
+                    class="remove-btn"
+                    id="removeBtn">
+
+                    Remove Image
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <button
+            type="button"
+            class="primary"
+            id="analyzeBtn">
+
+            Analyze X-ray
+
+        </button>
+
+    </form>
+
+</section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer style="text-align:center;padding:40px;color:#777;">
+
+        <p>
+            © 2026 AI Medical Diagnosis Assistant |
+            Built with Flask & TensorFlow
+        </p>
+
+    </footer>
+
+    <!-- JavaScript -->
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
