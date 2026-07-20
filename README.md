@@ -27,6 +27,8 @@ The project demonstrates how transfer learning can be applied to healthcare prob
 
 ---
 
+## Dataset link -  https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
+
 ##  Technologies Used
 
 ### Programming Language
